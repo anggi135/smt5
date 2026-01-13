@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +15,8 @@ use App\Http\Controllers\ProductController;
 // GUEST
 // ======================
 Route::get('/', function () {
-    return view('layouts.guest');
-})->name('guest');
+    return view('home');
+})->name('home');
 
 
 // ======================
@@ -30,6 +31,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Products (CRUD)
     Route::resource('products', ProductController::class);
+
+    // Categories (CRUD)
+    Route::resource('category', CategoryController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

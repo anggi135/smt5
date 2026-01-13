@@ -101,10 +101,11 @@
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{ asset('assets/js/main.js') }}"></cript>
+    <script src="{{ asset('assets/js/main.js') }}"></script>
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
     <!-- GitHub Buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    @stack('scripts')
 </body>
 </html>
