@@ -28,28 +28,20 @@ Route::get('/', function () {
 // ======================
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    // ======================
-    // DASHBOARD (ADMIN)
-    // ======================
+    // Dashboard (Admin only)
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware('admin')->name('dashboard');
 
-    // ======================
-    // PROFILE
-    // ======================
+    // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // ======================
-    // PRODUCTS (CRUD)
-    // ======================
+    // Products (CRUD)
     Route::resource('products', ProductController::class);
 
-    // ======================
-    // CATEGORIES (CRUD)
-    // ======================
+    // Categories (CRUD)
     Route::resource('category', CategoryController::class);
 
     // ======================
@@ -65,17 +57,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // ======================
     Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
     Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
-    Route::get('/checkout/sukses', [CheckoutController::class, 'sukses'])->name('checkout.sukses');
-    Route::put(
-        '/checkout/{order}/bukti-pembayaran',
-        [CheckoutController::class, 'updatePaymentProof']
-    )->name('checkout.updatePaymentProof');
-
-    // ======================
-    // ORDERS / RIWAYAT
-    // ======================
-    Route::get('/orders/history', [OrderController::class, 'history'])
-        ->name('orders.history');
 });
 
 // ======================

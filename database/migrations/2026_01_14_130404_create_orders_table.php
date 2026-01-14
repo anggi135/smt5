@@ -13,11 +13,22 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable()->index('user_id');
-            $table->date('tanggal')->nullable();
-            $table->decimal('total', 10)->nullable();
+            $table->date('tanggal');
+            $table->decimal('total', 12, 2);
             $table->string('bukti_pembayaran')->nullable();
-            $table->enum('status_pembayaran', ['pending', 'sukses', 'gagal'])->nullable();
+            $table->enum('status_pembayaran', [
+                'pending',
+                'lunas',
+                'gagal',
+                'diproses'
+            ])->default('pending');
+
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }
